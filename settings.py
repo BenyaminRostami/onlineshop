@@ -37,11 +37,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+
+    'crispy_forms',
+    'allauth', 
+    'allauth.account',
+
+
     'acount',
     'pages',
 
 ]
-
+AUTHENTICATION_BACKENDS = [
+    
+    'django.contrib.auth.backends.ModelBackend',
+# django allauth
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+SITE_ID=1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -49,10 +62,12 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    "allauth.account.middleware.AccountMiddleware" , 
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'onlineshop.urls'
+EMAIL_BACKEND= "django.core.mail.backends.console.EmailBackend"
 
 TEMPLATES = [
     {
@@ -127,3 +142,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'acount.CustomUser'
 LOGIN_REDIRECT_URL="home"
 LOGOUT_REDIRECT_URL="home"
+# signup setting
+ACCOUNT_SESSION_REMEMBER=True
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE  =False
+ACCOUNT_USERNAME_REQUIRED=False
+ACCOUNT_AUTHENTICATION_METHOD="email"
+ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_UNICQUE_EMAIL=True
+# crispy form settings
+CRISPY_TEMPLATE_PACK= "bootstrap4"
